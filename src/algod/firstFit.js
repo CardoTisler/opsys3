@@ -16,7 +16,6 @@ export const firstFit = (parsedInput) => {
             const lisatudProtsess = parsedInput[i].memorySlots + "," + parsedInput[i].duration
             memory = allocTask(memory, parsedInput[i])
             if(!memory) {
-                console.error("MEMORY EXCEEDED, ABORT PROGRAM")
                 //passing null to rowData will trigger the UI to render info about memoryslots exceeding
                 result.push({etapiIndex: i+1, lisatudProtsess, rowData: null})
                 return result;

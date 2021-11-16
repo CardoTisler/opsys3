@@ -2,11 +2,6 @@ import ResultsTableHeader from "./ResultsTableHeader";
 import {Grid} from '@material-ui/core'
 import CellTableRow from './CellTableRow';
 import { useSelector } from 'react-redux'
-import {firstFit} from '../../algod/firstFit';
-import {bestFit} from '../../algod/bestFit';
-import {worstFit} from '../../algod/worstFit'
-import {lastFit} from '../../algod/lastFit'
-import {randomFit} from '../../algod/randomFit'
 
 const renderResultsTable = (inputArr) => {
     let result = [];
@@ -76,12 +71,7 @@ const renderResultsRow = (data) => {
 }
 
 const ResultsTable = () => {
-    const inputString = useSelector((state) => state.tasksReducer.tasksString);
-    const algorithmChoice = useSelector((state) => state.algorithmReducer.currentAlgorithm)
-    const parsedInput = parseInputString(inputString);
-    // let inputArr = firstFit(parsedInput);
-    let inputArr = randomFit(parsedInput);
-
+    const inputArr = useSelector(state => state.resultReducer)
     return (
         <div>
             <Grid container>

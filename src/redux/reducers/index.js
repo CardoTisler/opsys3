@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import tasksReducer from "./tasksReducer";
-import algorithmReducer from "./algorithmReducer";
+import {resultReducer} from "./resultReducer";
 
 const allReducers = combineReducers({
-    tasksReducer,
-    algorithmReducer
+    resultReducer
 });
 
 export default allReducers;

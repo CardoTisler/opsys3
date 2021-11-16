@@ -2,7 +2,6 @@
 // [{etapiIndex: int, lisatudProtsess: string, rowData: [ {}, {}, {} ]}]
 export const lastFit = (parsedInput) => {
     const result = []
-
     let workingArray = []
     let memory = "-".repeat(50);
 
@@ -21,7 +20,6 @@ export const lastFit = (parsedInput) => {
             const lisatudProtsess = parsedInput[i].memorySlots + "," + parsedInput[i].duration
             memory = allocTask(memory, parsedInput[i])
             if (!memory) {
-                console.error("MEMORY EXCEEDED, ABORT PROGRAM")
                 //passing null to rowData will trigger the UI to render info about memoryslots exceeding
                 result.push({etapiIndex: i + 1, lisatudProtsess, rowData: null})
                 return result;
@@ -90,8 +88,6 @@ const allocTask = (memory, task) => {
     for (let i = holes.length - 1; i >= 0; i--) {
         const hole = holes[i];
         if (hole.size >= taskMemory.length) {
-            console.log(hole.size)
-            console.log(taskMemory)
             //this means current hole can fit our new task
             //make changes to memory, return it
             memory = replaceBetween(memory, hole.startingIndex, hole.startingIndex + taskMemory.length, taskMemory)

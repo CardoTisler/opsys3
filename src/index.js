@@ -1,3 +1,13 @@
+/**
+ * Opsüsteemid kodutöö 2
+ * Mäluhalduse visualiseerimine
+ *
+ * Autor: Cardo Tisler
+ * Kuupäev: 16/11/2021
+ *
+ * Stack: JavaScript/Node, React, Material UI, Redux
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

@@ -1,3 +1,28 @@
+#Info kasutajale:
+Kindlasti jooksutada production buildi, sest tavalise buildiga aeg-ajalt algoritmid töötlevad üle minuti.
+Optimeeritud production buildiga võtavad algoritmid aega < 1 sek.
+
+Kloonida projekt (kui version controli kaudu siin)
+
+npm install
+
+npm run build
+
+serve -s build
+
+prod build peaks localis olema http://localhost:5000
+
+
+Stack:
+
+* JavaScript/Node
+* React
+* Redux
+* Material UI
+
+Autor: Cardo Tisler
+
+Kuupäev: 16/11/2021
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -14,9 +14,6 @@ const renderCells = (tasksArray) => {
         }
         return x;
     })
-        // return arr.map((nr) => {
-        //     return <Cell backgroundColor={"blue"} taskLetter={"A"}/>
-        // })
 }
 const useStyles = makeStyles({
     cell: {
@@ -27,12 +24,7 @@ const useStyles = makeStyles({
     }
 
 })
-//rowData on array mis sisaldab objekte kujul
-// {
-//     letter: "A",
-//     memorySlots: 1,
-//     ticksLeft: 8
-// }
+
 const CellTableRow = (props) => {
     const classes = useStyles();
     return (

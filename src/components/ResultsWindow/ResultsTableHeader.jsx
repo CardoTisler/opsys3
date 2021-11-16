@@ -1,15 +1,23 @@
 import { Grid } from '@material-ui/core'
+import {makeStyles} from "@material-ui/core";
 
-let arr = [];
-for (let i = 0; i < 50; i++) {
-    arr.push(i);
-}
-const renderCells = () => {
-    return arr.map((nr) => {
-        return <td>{nr}</td>
-    })
-}
+const useStyles = makeStyles({
+    cell: {
+        padding: '4px'
+    }
+})
 const ResultsTableHeader = () => {
+    const classes = useStyles();
+
+    const renderCells = () => {
+        const result = []
+        for (let i = 0; i < 50; i++) {
+            result.push(<td className={classes.cell}>{i}</td>)
+        }
+        return result;
+    }
+
+
     return (
         <div>
             <Grid container>
