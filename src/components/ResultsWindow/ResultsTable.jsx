@@ -3,6 +3,7 @@ import {Grid} from '@material-ui/core'
 import CellTableRow from './CellTableRow';
 import { useSelector } from 'react-redux'
 import {firstFit} from '../../algod/firstFit';
+import {bestFit} from '../../algod/bestFit';
 
 const renderResultsTable = (inputArr) => {
     let result = [];
@@ -92,11 +93,19 @@ const parseInputString = (inputString) => {
 
 const ResultsTable = () => {
     const inputString = useSelector((state) => state.tasksReducer.tasksString);
-
+    // const algorithmChoice = useSelector((state) => state.algorithmReducer.currentAlgorithm)
     const parsedInput = parseInputString(inputString);
+    // let inputArr = firstFit(parsedInput);
+    let inputArr = [];
+    // console.log(algorithmChoice)
+    // if(algorithmChoice === 1){
+    //     inputArr = firstFit(parsedInput)
+    // }
+    // else if (algorithmChoice === 3){
+    //     console.log("best fit")
+    // }
 
-    const inputArr = firstFit(parsedInput);
-
+    // console.log(inputArr)
     return (
         <div>
             <Grid container>
