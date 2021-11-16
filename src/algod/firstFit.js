@@ -61,18 +61,18 @@ const removeTaskAlloc = (memory, task) => {
 }
 
 const stringToArrayOfTasks = (memory, parsedInput) => {
-    // TODO: Use task.memorySlots to jump forward in for loop
     let result = []
-    let previousChar = null;
-    for (let i = 0; i < memory.length; i++) {
+    for (let i = 0; i < memory.length; i += 1) {
+        //find character from memory string
         const ch = memory.charAt(i);
-        if(previousChar !== ch){
-            previousChar = ch;
-            const task = parsedInput.filter(task => task.letter === ch)[0]
-            if(task){
-                result.push(task)
-            }
-
+        //find task by using that memory char
+        const task = parsedInput.filter(task => task.letter === ch)[0]
+        if(task){
+            result.push(task)
+            console.log(task)
+            i += task.memorySlots - 1
+        } else {
+            result.push({letter: "-", color: "gray", memorySlots: 1})
         }
     }
 
