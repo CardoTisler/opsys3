@@ -1,5 +1,5 @@
 //result array koosneb 10st objektist, iga objekt kirjeldab result tabelis ühte rida.
-
+// [{etapiIndex: int, lisatudProtsess: string, rowData: [ {}, {}, {} ]}]
 export const firstFit = (parsedInput) => {
     const result = []
 
@@ -13,11 +13,16 @@ export const firstFit = (parsedInput) => {
                 ticksLeft: 10,
                 color: 'gray'}]})}
         else{
-            memory = allocTask(memory, parsedInput[i])
-            if(!memory) { console.error("MEMORY EXCEEDED, ABORT PROGRAM")}
-
-            workingArray.push(parsedInput[i]);
             const lisatudProtsess = parsedInput[i].memorySlots + "," + parsedInput[i].duration
+            memory = allocTask(memory, parsedInput[i])
+            if(!memory) {
+                console.error("MEMORY EXCEEDED, ABORT PROGRAM")
+                //passing null to rowData will trigger the UI to render info about memoryslots exceeding
+                result.push({etapiIndex: i+1, lisatudProtsess, rowData: null})
+                return result;
+
+            }
+            workingArray.push(parsedInput[i]);
             for (let j = 0; j < workingArray.length; j++) {
                 const task = workingArray[j]
                 let duration = task.duration - 1;
@@ -62,17 +67,27 @@ const removeTaskAlloc = (memory, task) => {
 
 const stringToArrayOfTasks = (memory, parsedInput) => {
     let result = []
+    let previousSlotWasGray = false;
     for (let i = 0; i < memory.length; i += 1) {
         //find character from memory string
         const ch = memory.charAt(i);
         //find task by using that memory char
         const task = parsedInput.filter(task => task.letter === ch)[0]
         if(task){
+            previousSlotWasGray = false;
             result.push(task)
-            console.log(task)
             i += task.memorySlots - 1
         } else {
-            result.push({letter: "-", color: "gray", memorySlots: 1})
+            if(previousSlotWasGray){
+                //increase memorySlots count for last object in results array
+                let viimaneTask = result[result.length - 1];
+                const viimaneSlotArv = viimaneTask.memorySlots + 1
+                result[result.length - 1] = {...viimaneTask, memorySlots: viimaneSlotArv}
+            } else {
+                //append graySlot object to results array
+                previousSlotWasGray = true;
+                result.push({letter: "-", color: "gray", memorySlots: 1})
+            }
         }
     }
 
