@@ -9,8 +9,7 @@ const algorithmReducer = (state = {currentAlgorithm: 1}, action) => {
         default:
             return {...state}
         case "CHANGE_ALGORITHM":
-            console.log("change algorithm to ", action.payload.newAlgorithmIndex)
-            return {currentAlgorithm: action.payload.newAlgorithmIndex}
+            return {currentAlgorithm: action.payload.currentAlgorithm}
     }
 }
 

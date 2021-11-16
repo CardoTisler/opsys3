@@ -4,6 +4,9 @@ import CellTableRow from './CellTableRow';
 import { useSelector } from 'react-redux'
 import {firstFit} from '../../algod/firstFit';
 import {bestFit} from '../../algod/bestFit';
+import {worstFit} from '../../algod/worstFit'
+import {lastFit} from '../../algod/lastFit'
+import {randomFit} from '../../algod/randomFit'
 
 const renderResultsTable = (inputArr) => {
     let result = [];
@@ -72,40 +75,13 @@ const renderResultsRow = (data) => {
     );
 }
 
-const parseInputString = (inputString) => {
-    let tahised = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    let varvid = ["green", "red", "orange", "blue", "yellow", "purple", "black", "pink", "cyan"]
-    let arr = inputString.split(";")
-    let etapid = arr.map((input) => {
-        return input.split(",");
-    });
-    let i = -1;
-    return etapid.map((etapp) => {
-        i += 1;
-        return {
-            memorySlots: etapp[0],
-            duration: etapp[1],
-            letter: tahised[i],
-            color: varvid[i]
-        }
-    });
-}
-
 const ResultsTable = () => {
     const inputString = useSelector((state) => state.tasksReducer.tasksString);
-    // const algorithmChoice = useSelector((state) => state.algorithmReducer.currentAlgorithm)
+    const algorithmChoice = useSelector((state) => state.algorithmReducer.currentAlgorithm)
     const parsedInput = parseInputString(inputString);
     // let inputArr = firstFit(parsedInput);
-    let inputArr = [];
-    // console.log(algorithmChoice)
-    // if(algorithmChoice === 1){
-    //     inputArr = firstFit(parsedInput)
-    // }
-    // else if (algorithmChoice === 3){
-    //     console.log("best fit")
-    // }
+    let inputArr = randomFit(parsedInput);
 
-    // console.log(inputArr)
     return (
         <div>
             <Grid container>

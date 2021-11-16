@@ -1,10 +1,9 @@
 import {makeStyles, Button} from '@material-ui/core';
-import SingleChoice from "./SingleChoice";
 import {useSelector, useDispatch} from "react-redux";
 import {addTasksString} from "../../redux/actions/tasksActions";
 import {useRef, useState} from "react";
 import {changeCurrentAlgorithm} from "../../redux/actions/algorithmActions";
-// TODO: Lisada reduxi mingi currentAlgorithm variable mille muutmise alusel ResultsTable re-renderitakse
+
 const useStyles = makeStyles({
     root: {
         "display": "block"
@@ -19,6 +18,25 @@ const useStyles = makeStyles({
     }
 })
 
+const parseInputString = (inputString) => {
+    let tahised = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    let varvid = ["green", "red", "orange", "blue", "yellow", "purple", "black", "pink", "cyan"]
+    let arr = inputString.split(";")
+    let etapid = arr.map((input) => {
+        return input.split(",");
+    });
+    let i = -1;
+    return etapid.map((etapp) => {
+        i += 1;
+        return {
+            memorySlots: etapp[0],
+            duration: etapp[1],
+            letter: tahised[i],
+            color: varvid[i]
+        }
+    });
+}
+
 const ChoicesBox = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
@@ -26,12 +44,19 @@ const ChoicesBox = () => {
 
     const handleInput = (newString) => {
         setInputString(newString)
-        dispatch(addTasksString(newString))
     }
 
     const handleSubmit = (algorithmIndex) => {
-        console.log("new algo index", algorithmIndex)
-        dispatch(changeCurrentAlgorithm(algorithmIndex))
+        const parsedInput = parseInputString(inputString)
+
+        switch (algorithmIndex){
+            default:
+                console.log("unknown algo index")
+                break;
+            case 1:
+
+        }
+        console.log(algorithmIndex)
     }
     return (
         <div>
@@ -75,10 +100,11 @@ const ChoicesBox = () => {
                 First Fit
             </Button>
 
-            <Button onclick={() => handleSubmit(3)}
+            <Button onClick={() => handleSubmit(3)}
                     color="primary">
                 Best Fit
             </Button>
+
         </div>
     )
 }
