@@ -2,7 +2,7 @@
 Kindlasti jooksutada production buildi, sest tavalise buildiga aeg-ajalt algoritmid töötlevad üle minuti.
 Optimeeritud production buildiga võtavad algoritmid aega < 1 sek.
 
-Kloonida projekt (kui version controli kaudu siin)
+Kloonida projekt
 
 npm install
 
