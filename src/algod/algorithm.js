@@ -1,4 +1,4 @@
-export const firstFit = (parsedInput) => {
+export const algorithm = (parsedInput) => {
     console.log(parsedInput);
     const result = [];
     let rowData = [];

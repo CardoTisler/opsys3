@@ -1,6 +1,6 @@
 import {makeStyles, Button, TextField} from '@material-ui/core';
 import {useState} from "react";
-import {firstFit} from "../../algod/firstFit";
+import {algorithm} from "../../algod/algorithm";
 
 
 const useStyles = makeStyles({
@@ -48,7 +48,7 @@ const ChoicesBox = (props) => {
 
     const handleSubmit = () => {
         const parsedInput = parseInputString(inputString)
-        const {result, calculations} = firstFit(parsedInput)
+        const {result, calculations} = algorithm(parsedInput)
         props.setResults(result);
         props.setCalculations(calculations);
     }

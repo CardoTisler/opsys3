@@ -1,4 +1,4 @@
-#Info kasutajale:
+# Info kasutajale:
 Sujuvama testimis protsessi jaoks soovitan jooksutada production buildi.
 
 Kloonida projekt
@@ -21,6 +21,8 @@ Stack:
 Autor: Cardo Tisler
 
 Kuupäev: 01/12/21
+
+Antud lahendus on ümber kohandatud opsys2 kodutööst.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
