@@ -1,12 +1,7 @@
 import {makeStyles, Button, TextField} from '@material-ui/core';
-import {useDispatch} from "react-redux";
 import {useState} from "react";
-import {addNewResult} from "../../redux/actions/resultActions";
 import {firstFit} from "../../algod/firstFit";
-import {bestFit} from "../../algod/bestFit";
-import {lastFit} from "../../algod/lastFit";
-import {worstFit} from "../../algod/worstFit";
-import {randomFit} from "../../algod/randomFit";
+
 
 const useStyles = makeStyles({
     root: {
@@ -27,7 +22,6 @@ const useStyles = makeStyles({
 })
 
 const parseInputString = (inputString) => {
-    let tahised = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     let varvid = ["green", "red", "orange", "blue", "yellow", "purple", "brown", "pink", "cyan"]
     let arr = inputString.split(";")
     let etapid = arr.map((input) => {
@@ -37,48 +31,31 @@ const parseInputString = (inputString) => {
     return etapid.map((etapp) => {
         i += 1;
         return {
-            memorySlots: etapp[0],
-            duration: etapp[1],
-            letter: tahised[i],
+            memorySlots: etapp[1],
+            letter: etapp[0],
             color: varvid[i]
         }
     });
 }
 
-const ChoicesBox = () => {
+const ChoicesBox = (props) => {
     const classes = useStyles();
-    const dispatch = useDispatch()
     const [inputString, setInputString] = useState("")
 
     const handleInput = (newString) => {
         setInputString(newString)
     }
 
-    const handleSubmit = (algorithmIndex) => {
+    const handleSubmit = () => {
         const parsedInput = parseInputString(inputString)
-
-        switch (algorithmIndex) {
-            default:
-                console.log("unknown algo index")
-                break;
-            case 1:
-                dispatch(addNewResult(firstFit(parsedInput)))
-                break;
-            case 2:
-                dispatch(addNewResult(lastFit(parsedInput)))
-                break;
-            case 3:
-                dispatch(addNewResult(bestFit(parsedInput)))
-                break;
-            case 4:
-                dispatch(addNewResult(worstFit(parsedInput)))
-                break;
-            case 5:
-                dispatch(addNewResult(randomFit(parsedInput)))
-                break;
-        }
+        const {result, calculations} = firstFit(parsedInput)
+        props.setResults(result);
+        props.setCalculations(calculations);
     }
 
+    const clearTable = () => {
+        props.clearTable();
+    }
     return (
         <div>
             <p>Vali või sisesta kuni kümne taskiga sisend.</p>
@@ -90,24 +67,24 @@ const ChoicesBox = () => {
                     variant="contained"
                     color="inherit"
                     onClick={() => {
-                        handleInput("1,8;35,4;3,6;4,2;1,4;3,3;1,2;5,1;50,1")
+                        handleInput("A,2;B,3;A,-;C,4;B,+3;D,5;E,15;C,-;F,5")
                     }}>
-                    Array 1 [1,8;35,4;3,6;4,2;1,4;3,3;1,2;5,1;50,1]</Button>
+                    Array 1 [A,2;B,3;A,-;C,4;B,+3;D,5;E,15;C,-;F,5]</Button>
 
                 <Button
                     variant="contained"
                     onClick={() => {
-                        handleInput("1,10;6,6;3,9;2,4;1,6;5,2;1,4;5,2;2,1;2,7")
+                        handleInput("A,2;B,3;C,3;D,5;B,-;E,4;D,-;E,+3;F,6")
                     }}>
-                    Array 2 [1,10;6,6;3,9;2,4;1,6;5,2;1,4;5,2;2,1;2,7]</Button>
+                    Array 2 [A,2;B,3;C,3;D,5;B,-;E,4;D,-;E,+3;F,6]</Button>
 
                 <Button
                     variant="contained"
                     color="inherit"
                     onClick={() => {
-                        handleInput("5,10;6,6;3,9;8,4;3,6;5,12;1,4;15,3;3,4;9,7")
+                        handleInput("A,2;B,3;C,4;D,5;B,-;E,7;D,-;E,+3;F,10")
                     }}>
-                    Array 3 [5,10;6,6;3,9;8,4;3,6;5,12;1,4;15,3;3,4;9,7]</Button>
+                    Array 3 [A,2;B,3;C,4;D,5;B,-;E,7;D,-;E,+3;F,10]</Button>
 
                 <TextField
                     className={classes.textField}
@@ -118,29 +95,15 @@ const ChoicesBox = () => {
             </div>
 
             <Button
-                onClick={() => handleSubmit(1)}
+                onClick={() => handleSubmit()}
                 color="primary">
-                First Fit
+                Run algorithm
             </Button>
 
-            <Button onClick={() => handleSubmit(2)}
-                    color="primary">
-                Last Fit
-            </Button>
-
-            <Button onClick={() => handleSubmit(3)}
-                    color="primary">
-                Best Fit
-            </Button>
-
-            <Button onClick={() => handleSubmit(4)}
-                    color="primary">
-                Worst Fit
-            </Button>
-
-            <Button onClick={() => handleSubmit(5)}
-                    color="primary">
-                Random Fit
+            <Button
+            onClick={() => clearTable()}
+            color="primary">
+                Clear output
             </Button>
         </div>
     )

@@ -1,6 +1,5 @@
 #Info kasutajale:
-Kindlasti jooksutada production buildi, sest tavalise buildiga aeg-ajalt algoritmid töötlevad üle minuti.
-Optimeeritud production buildiga võtavad algoritmid aega < 1 sek.
+Sujuvama testimis protsessi jaoks soovitan jooksutada production buildi.
 
 Kloonida projekt
 
@@ -18,11 +17,10 @@ Stack:
 * JavaScript/Node
 * React
 * Redux
-* Material UI
 
 Autor: Cardo Tisler
 
-Kuupäev: 16/11/2021
+Kuupäev: 01/12/21
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

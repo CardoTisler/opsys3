@@ -11,8 +11,8 @@ const ResultsTableHeader = () => {
 
     const renderCells = () => {
         const result = []
-        for (let i = 0; i < 50; i++) {
-            result.push(<td className={classes.cell}>{i}</td>)
+        for (let i = 0; i < 48; i++) {
+            result.push(<td className={classes.cell}>{i+1}</td>)
         }
         return result;
     }
@@ -25,11 +25,7 @@ const ResultsTableHeader = () => {
                     <p>Etapp</p>
                 </Grid>
 
-                <Grid item xs={1}>
-                    <p>Lisatud protsess</p>
-                </Grid>
-
-                <Grid item xs={10}>
+                <Grid item xs={11}>
                     {renderCells()}
                 </Grid>
             </Grid>

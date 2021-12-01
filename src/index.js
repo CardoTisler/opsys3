@@ -1,11 +1,11 @@
 /**
- * Opsüsteemid kodutöö 2
- * Mäluhalduse visualiseerimine
+ * Opsüsteemid kodutöö 3
+ * Salvestusruumihalduse visualiseerimine
  *
  * Autor: Cardo Tisler
- * Kuupäev: 16/11/2021
+ * Kuupäev: 01/12/21
  *
- * Stack: JavaScript/Node, React, Material UI, Redux
+ * Stack: JavaScript/Node, React, Material UI
  */
 
 import React from 'react';
@@ -14,18 +14,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import allReducers from "./redux/reducers";
-
-const store = createStore(allReducers);
-
 ReactDOM.render(
-    <Provider store={store}>
         <React.StrictMode>
             <App />
-        </React.StrictMode>
-    </Provider>,
+        </React.StrictMode>,
   document.getElementById('root')
 );
 

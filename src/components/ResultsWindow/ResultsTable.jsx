@@ -1,7 +1,6 @@
 import ResultsTableHeader from "./ResultsTableHeader";
 import {Grid} from '@material-ui/core'
 import CellTableRow from './CellTableRow';
-import { useSelector } from 'react-redux'
 
 const renderResultsTable = (inputArr) => {
     let result = [];
@@ -58,11 +57,7 @@ const renderResultsRow = (data) => {
                     <p>{data.etapiIndex}</p>
                 </Grid>
 
-                <Grid item xs={1}>
-                    <p>{data.lisatudProtsess}</p>
-                </Grid>
-
-                <Grid item xs={10}>
+                <Grid item xs={11}>
                     <CellTableRow data={data.rowData}/>
                 </Grid>
             </Grid>
@@ -70,8 +65,7 @@ const renderResultsRow = (data) => {
     );
 }
 
-const ResultsTable = () => {
-    const inputArr = useSelector(state => state.resultReducer)
+const ResultsTable = (props) => {
     return (
         <div>
             <Grid container>
@@ -79,7 +73,7 @@ const ResultsTable = () => {
                     <ResultsTableHeader/>
                 </Grid>
 
-                {renderResultsTable(inputArr)}
+                {renderResultsTable(props.data)}
 
             </Grid>
         </div>
